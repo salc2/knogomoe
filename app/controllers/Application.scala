@@ -13,19 +13,19 @@ import play.api.libs.ws._
 object Application extends Controller {
 
   def index = Action {
-    Ok(views.html.index("Scala TTS"))
+    Ok(views.html.processing())
   }
 
-  def tts(msg:String) = Action {
-   //val tts = new SimpleTTS(Lang.Es)
-   //val gettts =  tts.getTTS(msg).map(response =>{
-//	 Ok.stream(Enumerator.fromStream(response))
-//	})
-   Async {
-   WS.url("https://translate.google.com/translate_tts?tl=es&q=hola").get().map(response => {
-    val asStream: InputStream = response.ahcResponse.getResponseBodyAsStream
-    Ok.stream(Enumerator.fromStream(asStream))
-  })
-}
+  def tts(msg:String) = Action.async {
+   val s = msg.split("""\.""")(0) 
+   val tts = new SimpleTTS(Lang.Es)
+   tts.getTTS(s).map(response =>{
+	val asStream:Array[Byte] = response.ahcResponse.getResponseBodyAsBytes
+	 Ok(asStream).as("audio/mpeg")
+    })
+   //WS.url("https://translate.google.com/translate_tts?tl=es&q=hola").get().map(response => {
+    //val asStream:Array[Byte] = response.ahcResponse.getResponseBodyAsBytes
+    //Ok(asStream).as("audio/mpeg")
+  //})
 }
 }

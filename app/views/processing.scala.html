@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Processing</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/processing.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/howler.min.js")" type="text/javascript"></script>
+    	<script type="text/javascript">
+		//var pjs = Processing.getInstanceById("mySketch")
+		//function sketchProc(processing) {
+		//	p2 = processing;
+		//}
+
+		//var canvas = document.getElementById("mySketch");
+		// attaching the sketchProc function to the canvas
+		//var p = new Processing(canvas, sketchProc);
+	</script>
+    </head>
+    <body>
+    	<canvas id="mySketch" data-processing-sources="@routes.Assets.at("javascripts/anything.pde")"></canvas>
+    </body>
+</html>

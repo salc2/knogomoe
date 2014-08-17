@@ -25,9 +25,8 @@ class SimpleTTS(lang:Lang.Value){
 
 val TEXT_TO_SPEECH_SERVICE:String = "http://translate.google.com/translate_tts"
 
-def getTTS(text:String):Future[InputStream] = {
+def getTTS(text:String):Future[Response] = {
      WS.url(TEXT_TO_SPEECH_SERVICE + "?" + "tl="+lang.toString().toLowerCase() + "&q=" + text).get()
-	.map(response => {response.ahcResponse.getResponseBodyAsStream()})
   }
 def getTTSAndSave(text:String):Unit = {
      WS.url(TEXT_TO_SPEECH_SERVICE + "?" + "tl="+lang.toString().toLowerCase() + "&q=" + text).get().map(response => {
